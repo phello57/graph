@@ -1,6 +1,7 @@
 import java.util.*;
 import Class.*;
 import Functions.*;
+import Tasks.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -147,6 +148,23 @@ public class Main {
         }
 
         /* Задача 1. */
+        // Дана матрица целых чисел. Островом считаются стоящие рядом 0 по диагонали, вертикали или горизонтали. Определить все острова
+        int[][] matrix = {
+                 {0, 0, 1, 0}
+                ,{0, 1, 0, 1}
+                ,{1, 1, 0, 1}
+                ,{0, 1, 0, 1}
+                ,{1, 1, 1, 1}
+        };
+        // OutPut : {1, 7} в любом порядке
+
+        ArrayList<Integer> arr = new ArrayList<>();
+        arr = Tasks.get_island_size(matrix);
+
+        System.out.println("----------- Ответ к 1 задаче: ");
+        for (int d : arr) {
+            System.out.print(" "+ d);
+        }
 
     }
 }
