@@ -104,5 +104,37 @@ public class LoopSearch {
         restoreGraphEdges(deletedEdges);
         return cycles;
     }
+    // Суть: та же самая фигня с нахождением цикла, если есть цикл - вернуть false
+    public static boolean topologicalSort (Node             node
+                                         , HashSet<Node>    passed
+                                         , HashSet<Node>    visiting
+                                         , ArrayList<Node>  sortedNodes) {
+        if (visiting.contains(node)) return false;
+        visiting.add(node);
+
+        for (Edge edge : node.edges) {
+            if (passed.contains(edge.pointerNode)) continue;
+            if (!topologicalSort(edge.pointerNode, passed, visiting, sortedNodes)) return false;
+        }
+
+        visiting.remove(node);
+        passed.add(node);
+        sortedNodes.add(node); // здесь будут узлы, которые не имеют цикла. "Ответ для интервью"
+        return true;
+    }
+
+
+    public static ArrayList<Node> topologicalSort(HashMap<Integer, Node> graph) {
+        HashSet<Node> passed = new HashSet<>();
+        HashSet<Node> visiting = new HashSet<>();
+        ArrayList<Node> sortedNodes = new ArrayList<>();
+
+        for (Map.Entry<Integer, Node> entrySet : graph.entrySet()) {
+            Node node = entrySet.getValue();
+            if (passed.contains(node)) continue;
+            if (!topologicalSort(node, passed, visiting, sortedNodes)) return null;
+        }
+        return sortedNodes;
+    }
 
 }

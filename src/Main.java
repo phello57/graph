@@ -138,8 +138,13 @@ public class Main {
             Топологическая сортировка
 
          */
-
-
+        System.out.println("----------- Topological Sort:");
+        ArrayList<Node> cycles_in_graph = LoopSearch.topologicalSort(main_hash);
+        if (cycles_in_graph == null) {
+            System.out.println("Graph has cycles");
+        } else {
+            System.out.println("Graph has no cycles");
+        }
 
         /* Задача 1. */
 
