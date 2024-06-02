@@ -105,6 +105,7 @@ public class Path {
     public static void iteration_all( Node                      p_start
                                     , Node                      p_end
                                     , List<List<Node>>          p_out_paths) {
+
         // Множества, в которых Узел\ребро имеет непосещенных детей
         HashSet<Node> has_no_visit_child_Nodes = new HashSet<>();
         HashSet<Edge> has_no_visit_child_Edges = new HashSet<>();

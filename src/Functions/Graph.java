@@ -30,8 +30,11 @@ public class Graph {
             Node pointer_node = add_or_get_node(i_node_pointer, ret_main_hash);
 
             if (pointer_node == null) continue;
+            Edge edge = new Edge(pointer_node, i_weight_edge);
 
-            node.edges.add(new Edge(pointer_node, i_weight_edge));
+            node.edges.add(edge);
+            pointer_node.parents.put(node, edge);
+
             // System.out.println("From: "+node.value+" to "+pointer_node.value+" with weight= "+i_weight_edge);
         }
         return ret_main_hash;

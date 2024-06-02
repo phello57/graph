@@ -72,21 +72,27 @@ public class LoopSearch {
             node.edges.addAll(edges);
         }
     }
-    /*
-    List<LinkedList<Node>> getAllCyclesPaths(HashMap<Integer, Node> graph) {
-        HashMap<Node, List<Edge>> deletedEdges = new HashMap();
-        List<LinkedList<Node>> cycles = new ArrayList<>();
 
-        for (Map.Entry<Integer, Node> nodePair : graph.entrySet()) {
+    public static List<List<Node>> getAllCyclesPaths(HashMap<Integer, Node> graph) {
+        HashMap<Node, List<Edge>> deletedEdges = new HashMap();
+        List<List<Node>> cycles = new ArrayList<>();
+
+        for (Map.Entry<Integer, Node> nodePair : graph.entrySet()) {    // берем узел
             Node node = nodePair.getValue();
-            for (Map.Entry<Node, Edge> entry : node.parents.entrySet()) {
-                Node parentNode = entry.getKey();
-                Edge parentEdge = entry.getValue();
+
+
+            for (Map.Entry<Node, Edge> entry : node.parents.entrySet()) {   // берем все указатели
+                Node parentNode = entry.getKey();       // родительский узел
+                Edge parentEdge = entry.getValue();     // родительское ребро
                 List<List<Node>> out_cyclePaths = new ArrayList<>();
 
-                Path.iteration_all(node, parentNode, out_cyclePaths);
+                Path.iteration_all(node, parentNode, out_cyclePaths); // искать путь мы от а до б умеем, всё просто
 
                 cycles.addAll(out_cyclePaths);
+
+
+                // Но тут проблема, что узлы мы итерируем все, а цикл он из нескольких узлов может состоять
+                // т.е нода новая, а цикл тот же самый
 
                 parentNode.edges.remove(parentEdge);
                 if (!deletedEdges.containsKey(parentNode)) {
@@ -95,8 +101,8 @@ public class LoopSearch {
                 deletedEdges.get(parentNode).add(parentEdge);
             }
         }
-        restoreGraphEdges(graph, deletedEdges);
+        restoreGraphEdges(deletedEdges);
         return cycles;
     }
-    */
+
 }

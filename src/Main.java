@@ -6,14 +6,15 @@ public class Main {
     public static void main(String[] args) {
         int[][] file = new int[][]{
                 {1, 2, 2}
-                , {1, 3, 2}
-                , {1, 4, 0}
-                , {3, 5, 2}
-                , {4, 5, 10}
-                , {4, 7, 2}
+                , {2, 3, 2}
+                , {3, 4, 0}
+                , {4, 1, 2}
+                //, {4, 5, 10}
+
+                , {1, 5, 2}
                 , {5, 6, 100}
                 , {6, 7, 0}
-                , {6, 5, 0}
+                , {7, 5, 0}
 
         };
 
@@ -121,7 +122,17 @@ public class Main {
         /*
             Поиск всех циклов
          */
-
+        System.out.println("----------- поиск всех циклов:");
+        List<List<Node>> cycles = new ArrayList<>();
+        cycles = LoopSearch.getAllCyclesPaths(main_hash);
+        i = 0;
+        for (List list : cycles) {
+            System.out.println("    "+ i +":");
+            for (Object node : list) {
+                System.out.println(((Node) node).value);
+            }
+            i++;
+        }
 
         /*
             Топологическая сортировка
