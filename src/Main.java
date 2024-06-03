@@ -191,10 +191,32 @@ public class Main {
         } else {
             System.out.println("Graph has no cycles");
             for (Object node : cycles2) {
-                System.out.println(((Node) node).s_value);
+                System.out.print(((Node) node).s_value+ " ");
             }
         }
 
+        /* Задача 3. */
+        // Реализовать pain заливку
+        // Эмулирую клик передавая ячейку
+        System.out.println();
+        System.out.println("----------- Ответ к 3 задаче: ");
+        int[][] str_matrix = new int[][]
+                {
+                         {1, 0, 0, 0, 1, 1, 0}
+                        ,{1, 1, 0, 0, 0, 1, 0}
+                        ,{0, 1, 1, 1, 0, 1, 0}
+                        ,{0, 0, 0, 1, 1, 1, 0}
+                        ,{0, 0, 0, 0, 0, 0, 0}
+                };
+
+        Tasks.fn_paint_fill(str_matrix, 3, 0, 1);
+
+        for (int[] list : str_matrix) {
+            for (int i_cur : list) {
+                System.out.print(i_cur + " ");
+            }
+            System.out.println();
+        }
     }
 }
 
