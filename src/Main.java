@@ -152,7 +152,7 @@ public class Main {
         int[][] matrix = {
                  {0, 0, 1, 0}
                 ,{0, 1, 0, 1}
-                ,{1, 1, 0, 1}
+                ,{1, 1, 1, 1}
                 ,{0, 1, 0, 1}
                 ,{1, 1, 1, 1}
         };
@@ -164,6 +164,35 @@ public class Main {
         System.out.println("----------- Ответ к 1 задаче: ");
         for (int d : arr) {
             System.out.print(" "+ d);
+        }
+
+
+        /* Задача 2. */
+        // Дан набор проектов и зависимостей, вывести порядок компиляции проектов если он существует
+
+        String[][] str_dependencies = new String[][] {
+                {"f", "c"}
+                ,{"f", "b"}
+                ,{"f", "a"}
+                ,{"c", "a"}
+                ,{"b", "a"}
+                ,{"b", "e"}
+                ,{"a", "e"}
+                ,{"d", "g"}
+        };
+        System.out.println();
+        System.out.println("----------- Ответ к 2 задаче: ");
+
+        HashMap<String, Node> main_string_hash = Graph.create(str_dependencies);
+        List<Node> cycles2 = LoopSearch.topologicalSort(main_string_hash, 1);
+
+        if (cycles2 == null) {
+            System.out.println("Graph has cycles");
+        } else {
+            System.out.println("Graph has no cycles");
+            for (Object node : cycles2) {
+                System.out.println(((Node) node).s_value);
+            }
         }
 
     }

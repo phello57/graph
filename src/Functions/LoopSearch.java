@@ -10,7 +10,7 @@ public class LoopSearch {
                                 , LinkedHashSet<Integer>  p_nodes_cant_be_loop
                                 , LinkedHashSet<Node>     p_could_be_loop_nodes
                                 , LinkedHashSet<Node>     p_out_path_to_cycle
-                                , HashSet<Node> p_out_cycle_start_node) {
+                                , HashSet<Node>           p_out_cycle_start_node) {
 
         /*
             . Цикл в графе - это возврат к предыдущему узлу
@@ -49,7 +49,8 @@ public class LoopSearch {
         согласно 2 посылке
          */
     }
-    public static LinkedHashSet<Node> cutCycles(LinkedHashSet<Node> p_out_full_path, HashSet<Node> p_where_cycle_start) {
+    public static LinkedHashSet<Node> cutCycles(LinkedHashSet<Node> p_out_full_path
+                                                , HashSet<Node> p_where_cycle_start) {
         Node start_cycle_node = p_where_cycle_start.iterator().next();
 
         while (p_out_full_path.iterator().hasNext()) {
@@ -73,11 +74,11 @@ public class LoopSearch {
         }
     }
 
-    public static List<List<Node>> getAllCyclesPaths(HashMap<Integer, Node> graph) {
+    public static List<List<Node>> getAllCyclesPaths(HashMap<Integer, Node> p_graph) {
         HashMap<Node, List<Edge>> deletedEdges = new HashMap();
         List<List<Node>> cycles = new ArrayList<>();
 
-        for (Map.Entry<Integer, Node> nodePair : graph.entrySet()) {    // берем узел
+        for (Map.Entry<Integer, Node> nodePair : p_graph.entrySet()) {    // берем узел
             Node node = nodePair.getValue();
 
 
@@ -105,31 +106,31 @@ public class LoopSearch {
         return cycles;
     }
     // Суть: та же самая фигня с нахождением цикла, если есть цикл - вернуть false
-    public static boolean topologicalSort (Node             node
-                                         , HashSet<Node>    passed
-                                         , HashSet<Node>    visiting
-                                         , ArrayList<Node>  sortedNodes) {
-        if (visiting.contains(node)) return false;
-        visiting.add(node);
+    public static boolean topologicalSort (Node             p_node
+                                         , HashSet<Node>    p_passed
+                                         , HashSet<Node>    p_visiting
+                                         , ArrayList<Node>  p_sortedNodes) {
+        if (p_visiting.contains(p_node)) return false;
+        p_visiting.add(p_node);
 
-        for (Edge edge : node.edges) {
-            if (passed.contains(edge.pointerNode)) continue;
-            if (!topologicalSort(edge.pointerNode, passed, visiting, sortedNodes)) return false;
+        for (Edge edge : p_node.edges) {
+            if (p_passed.contains(edge.pointerNode)) continue;
+            if (!topologicalSort(edge.pointerNode, p_passed, p_visiting, p_sortedNodes)) return false;
         }
 
-        visiting.remove(node);
-        passed.add(node);
-        sortedNodes.add(node); // здесь будут узлы, которые не имеют цикла. "Ответ для интервью"
+        p_visiting.remove(p_node);
+        p_passed.add(p_node);
+        p_sortedNodes.add(p_node); // здесь будут узлы, которые не имеют цикла. "Ответ для интервью"
         return true;
     }
 
 
-    public static ArrayList<Node> topologicalSort(HashMap<Integer, Node> graph) {
+    public static ArrayList<Node> topologicalSort(HashMap<Integer, Node> p_graph) {
         HashSet<Node> passed = new HashSet<>();
         HashSet<Node> visiting = new HashSet<>();
         ArrayList<Node> sortedNodes = new ArrayList<>();
 
-        for (Map.Entry<Integer, Node> entrySet : graph.entrySet()) {
+        for (Map.Entry<Integer, Node> entrySet : p_graph.entrySet()) {
             Node node = entrySet.getValue();
             if (passed.contains(node)) continue;
             if (!topologicalSort(node, passed, visiting, sortedNodes)) return null;
@@ -137,4 +138,16 @@ public class LoopSearch {
         return sortedNodes;
     }
 
+    public static ArrayList<Node> topologicalSort(HashMap<String, Node> p_graph, int p_nothing) {
+        HashSet<Node> passed = new HashSet<>();
+        HashSet<Node> visiting = new HashSet<>();
+        ArrayList<Node> sortedNodes = new ArrayList<>();
+
+        for (Map.Entry<String, Node> entrySet : p_graph.entrySet()) {
+            Node node = entrySet.getValue();
+            if (passed.contains(node)) continue;
+            if (!topologicalSort(node, passed, visiting, sortedNodes)) return null;
+        }
+        return sortedNodes;
+    }
 }

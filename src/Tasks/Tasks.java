@@ -50,11 +50,13 @@ public class Tasks {
         for (int i_row = 0; i_row < p_matrix.length; i_row++) {
             for (int i_col = 0; i_col < p_matrix[i_row].length; i_col++) {
                 int cur_val = get_island_size(p_matrix, passed, i_row, i_col);
-                if (cur_val != 0) ret_arr.add(cur_val);
+                if (cur_val > 0) ret_arr.add(cur_val);
 
             }
         }
 
         return ret_arr;
     }
+
+
 }

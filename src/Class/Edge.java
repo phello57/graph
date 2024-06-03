@@ -8,4 +8,7 @@ public class Edge {
         this.weight = weight;
         this.pointerNode = pointerNode;
     }
+    public Edge(Node pointerNode) {
+        this.pointerNode = pointerNode;
+    }
 }
