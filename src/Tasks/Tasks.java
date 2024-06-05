@@ -59,33 +59,29 @@ public class Tasks {
     }
 
     public static boolean is_valid_cell_color(int[][]       p_matrix
-                                            , boolean[][]   p_passed
                                             , int           p_old_color
                                             , int           p_row
                                             , int           p_col) {
         if ( (p_row >= 0 && p_row < p_matrix.length)        // Не выходим за строки
                 && (p_col >= 0 && p_col < p_matrix[0].length)     // Не выходим за колонки
                 && p_matrix[p_row][p_col] == p_old_color
-                && !p_passed[p_row][p_col]
         ) return true;
         return false;
     }
     public static void paint_fill(int[][]       p_matrix
-                                , boolean[][]   p_passed
                                 , int           p_new_color
                                 , int           p_old_color
                                 , int           p_row
                                 , int           p_col
     ) {
-        if (!is_valid_cell_color(p_matrix, p_passed, p_old_color, p_row, p_col)) return;
+        if (!is_valid_cell_color(p_matrix, p_old_color, p_row, p_col)) return;
 
         p_matrix[p_row][p_col] = p_new_color;
-        p_passed[p_row][p_col] = true;
 
-        paint_fill(p_matrix, p_passed, p_new_color, p_old_color, p_row - 1, p_col);            // центр верх
-        paint_fill(p_matrix, p_passed, p_new_color, p_old_color, p_row, p_col - 1);            // центр лево
-        paint_fill(p_matrix, p_passed, p_new_color, p_old_color, p_row, p_col + 1);            // центр право
-        paint_fill(p_matrix, p_passed, p_new_color, p_old_color,p_row + 1, p_col);           // центр низ
+        paint_fill(p_matrix, p_new_color, p_old_color, p_row - 1, p_col);            // центр верх
+        paint_fill(p_matrix, p_new_color, p_old_color, p_row, p_col - 1);            // центр лево
+        paint_fill(p_matrix, p_new_color, p_old_color, p_row, p_col + 1);            // центр право
+        paint_fill(p_matrix, p_new_color, p_old_color,p_row + 1, p_col);           // центр низ
 
     }
     public static void fn_paint_fill(int[][]       p_matrix
@@ -93,7 +89,6 @@ public class Tasks {
                                     , int           p_row
                                     , int           p_col) {
         int color_what_need_change = p_matrix[p_row][p_col];
-        boolean[][] passed = new boolean[p_matrix.length][p_matrix[0].length];
-        paint_fill(p_matrix, passed, p_new_color, color_what_need_change, p_row, p_col);
+        paint_fill(p_matrix, p_new_color, color_what_need_change, p_row, p_col);
     }
 }
